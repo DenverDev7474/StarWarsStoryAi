@@ -1,0 +1,11 @@
+.home-container {
+  color: #FFE81F; /* Star Wars yellow */
+  background-color: #000; /* Black background */
+  font-family: 'Star Jedi', sans-serif; /* You would need to import this Star Wars-themed font or any other of your preference */
+  text-align: center;
+  padding: 2rem;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
