@@ -17,18 +17,6 @@ Using [Star Wars API](https://swapi.dev/documentation), and OpenAi's [GPT-3](htt
 4. As a user, I want to be able to generate a unique and personalized Star Wars story based on my selected characters, setting, and plot.
 5. As a user, I want to be able to share my generated story on social media platforms.
 
-## Wireframes
-![Wireframe](
-
-## Data Model
-![Data Model](
-## API Endpoints
-![API Endpoints](
-## Component Hierarchy
-![Component Hierarchy](
-## Component Breakdown
-![Component Breakdown](
-
 ## MVP
 - Create a React app that allows users to select their favorite Star Wars characters from a comprehensive list.
 - Create a React app that allows users to select their preferred Star Wars setting.
@@ -50,24 +38,10 @@ Using [Star Wars API](https://swapi.dev/documentation), and OpenAi's [GPT-3](htt
 - Jest**
 - Axios**
 - Material UI / Tailwind Css**
-
-## Stretch Goals
-
-## Code Snippet
-```
-```
-
-## Issues and Resolutions
-```
-```
-
 ## Project Delivery
 - [ ] Complete MVP
 - [ ] Complete Post-MVP
 - [ ] Present Project
-
-## 
-
 
 ## Getting Started
 #### Run App
