@@ -3,7 +3,7 @@ import { Character } from '../features/characters/charactersSlice';
 import { Setting } from '../features/settings/settingsSlice';
 import { Starship } from '../features/starships/starshipsSlice';
 
-const BASE_URL = 'https://swapi.dev/api/';
+const BASE_URL = 'https://swapi.py4e.com/api/';
 
 export const getCharacters = async () => {
   let allCharacters = [] as Character[];
@@ -15,11 +15,6 @@ export const getCharacters = async () => {
   }
   return allCharacters;
 };
-
-// export const getCharacter = async (id: string) => {
-//   const response = await axios.get(`${BASE_URL}/people/${id}`);
-//   return response.data;
-// };
 
 export const getSettings = async () => {
   let allSettings = [] as Setting[];
@@ -47,13 +42,5 @@ export const getStarships = async () => {
     nextPage = response.data.next;
   }
   return allStarships;
-}
+};
 
-// export const getStarship = async (id: string) => {
-//   const response = await axios.get(`${BASE_URL}/starships/${id}`);
-//   return response.data;
-// }
-
-
-// Post MVP - add more Api calls to get species, vehicles, films, etc.
- 
