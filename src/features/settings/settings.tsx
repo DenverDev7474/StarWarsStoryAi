@@ -1,20 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Setting, fetchSettings } from './settingsSlice';
 import { useAppDispatch, RootState  } from '../../store';
+import { setSetting } from '../generator/generatorSlice';
+import { Modal, Button } from 'react-bootstrap';
 
 
 function Settings() {
   const dispatch = useAppDispatch();
   const settings = useSelector((state: RootState) => state.settings);
+  const [addedSetting, setAddedSetting] = useState<string>('');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchSettings());
   }, [dispatch]);
 
+  const addSetting = (name: string) => {
+    if (!isAdded(name) && addedSetting !== '') {
+      setShowModal(true);
+    } else {
+      setAddedSetting(name);
+      dispatch(setSetting(name));
+    }
+  };
+
+  const isAdded = (setting: string) => {
+    return addedSetting.includes(setting);
+  };
+
+  const handleClose = () => setShowModal(false);  
+
   return (
     <div className="container">
       <h1>Star Wars Settings</h1>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Setting already exists!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -38,13 +68,13 @@ function Settings() {
                 <td>{setting.rotation_period}</td>
                 <td>{setting.surface_water}</td>
                 <td>{setting.terrain}</td>
-                <td><button>Add to Story</button></td>
+                <td><button onClick={() => addSetting(setting.name)} disabled={isAdded(setting.name)}>Add to Story</button></td>
               </tr> 
               </tbody>
             ))
           )}
       </table>
-    </div>  
+    </div>
   );
 };
 
