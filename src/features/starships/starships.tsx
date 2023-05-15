@@ -73,10 +73,10 @@ function Starships() {
           )}
       </table>
       <StarshipModal
-        isOpen={isModalOpen}
-        closeModal={closeModal}
-        closeModalAfterSelection={closeModalAfterSelection}
-        starship={currentStarship}
+        show={isModalOpen}
+        onClose={closeModal}
+        selected={closeModalAfterSelection}
+        starship={currentStarship!}
       />
     </div>  
   );

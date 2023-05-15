@@ -1,33 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-
 export interface Story {
   hero: string;
   sidekick: string;
   villain: string;
   setting: string;
-  adventure: string;
   villainStarship: string;
   heroStarship: string;
   completedStory: string;
 }
-
-// const adventure = "A story about man vs. time."
-// const hero = "Luke Skywalker"
-// const villain = "Darth Vader"
-//   const setting = "Tatooine"
-//   const starship = "Millennium Falcon"
-//   const starship2 = "Death Star"
-//   const sidekick = "Chewbacca"
-//   const sidekick2 = "R2-D2"
-
 
 const initialState: Story = {
   hero: '',
   sidekick: '',
   villain: '',
   setting: '',
-  adventure: '',
   villainStarship: '',
   heroStarship: '',
   completedStory: ''
@@ -49,9 +36,6 @@ const generatorSlice = createSlice({
     setSetting(state, action: PayloadAction<string>) {
       state.setting = action.payload;
     },
-    setAdventure(state, action: PayloadAction<string>) {
-      state.adventure = action.payload;
-    },
     setVillainStarship(state, action: PayloadAction<string>) {
       state.villainStarship = action.payload;
     },
@@ -61,7 +45,6 @@ const generatorSlice = createSlice({
     setCompletedStory(state, action: PayloadAction<string>) {
       state.completedStory = action.payload;
     }
-
   },
 }); 
 
@@ -70,7 +53,6 @@ export const {
   setSidekick, 
   setVillain, 
   setSetting,
-  setAdventure, 
   setVillainStarship, 
   setHeroStarship,
   setCompletedStory
