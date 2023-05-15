@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import charactersReducer from '../src/features/characters/charactersSlice';
 import settingsReducer from '../src/features/settings/settingsSlice';
 import starshipsReducer from '../src/features/starships/starshipsSlice';
+import generatorReducer from '../src/features/generator/generatorSlice';
 import { useDispatch } from 'react-redux';
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     characters: charactersReducer,
     settings: settingsReducer,
     starships: starshipsReducer,
+    generator: generatorReducer,
   },
 });
 

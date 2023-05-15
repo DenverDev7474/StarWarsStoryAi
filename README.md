@@ -39,14 +39,24 @@ Using [Star Wars API](https://swapi.dev/documentation), and OpenAi's [GPT-3](htt
 - Axios**
 - Material UI / Tailwind Css**
 ## Project Delivery
-- [ ] Complete MVP
+- [x] Complete MVP
 - [ ] Complete Post-MVP
 - [ ] Present Project
 
 ## Getting Started
 #### Run App
 
+Must run server and client separately so that the server can proxy requests to the OpenAI API so that the API key is not exposed to the client. You will need an Api key from OpenAI to run the server.
 ```bash
+cd server
+npm install
+node server.js
+```
+
+To run the client. 
+```bash
+cd .
+npm install
 npm start
 ```
 

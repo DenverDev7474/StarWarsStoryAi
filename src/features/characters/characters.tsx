@@ -14,21 +14,21 @@ function Characters() {
   return (
     <div className="container">
       <h1>Star Wars Characters</h1>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Height</th>
-            <th>Mass</th>
-            <th></th>
-          </tr>
-        </thead>
-        {characters.loading ? (
-           <div>Loading...</div>
-          ) : (
-            characters.data.map((character: Character) => (
-            <tbody>
+      {characters.loading ? (
+        <div>Loading...</div>
+      ) : (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Height</th>
+              <th>Mass</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {characters.data && characters.data.map((character: Character) => (
               <tr key={character.name}>
                 <td>{character.name}</td>
                 <td>{character.gender}</td>
@@ -36,10 +36,10 @@ function Characters() {
                 <td>{character.mass}</td>
                 <td><button>Add to Story</button></td>
               </tr> 
-            </tbody>
-            ))
-          )}
-      </table>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>  
   );
 };
