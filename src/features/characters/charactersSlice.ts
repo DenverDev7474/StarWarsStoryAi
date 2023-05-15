@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from '../../store';
-import { getCharacters } from '../../api/starwarsApi';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppThunk } from "../../store";
+import { getCharacters } from "../../api/starwarsApi";
 
 interface CharactersState {
   loading: boolean;
@@ -22,7 +22,7 @@ const initialState: CharactersState = {
 };
 
 const charactersSlice = createSlice({
-  name: 'characters',
+  name: "characters",
   initialState,
   reducers: {
     getCharactersStart(state) {
@@ -53,14 +53,14 @@ export const fetchCharacters = (): AppThunk => async (dispatch) => {
     const characters = await getCharacters();
     dispatch(getCharactersSuccess(characters));
   } catch (error: any) {
-    let errorMessage = 'Unknown error occurred';
-    if( error.response ) { // handle known server errors
+    let errorMessage = "Unknown error occurred";
+    if (error.response) {
       if (error.response.status === 404) {
-        errorMessage = 'Characters not found';
+        errorMessage = "Characters not found";
       } else if (error.response.status === 500) {
-        errorMessage = 'Server error. Please try again later';
+        errorMessage = "Server error. Please try again later";
       }
-    } else if (error.message) { // handle other types of errors
+    } else if (error.message) {
       errorMessage = error.message;
     }
     dispatch(getCharactersFailure(errorMessage));

@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Setting, fetchSettings } from './settingsSlice';
-import { useAppDispatch, RootState  } from '../../store';
-import { setSetting } from '../generator/generatorSlice';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Setting, fetchSettings } from "./settingsSlice";
+import { useAppDispatch, RootState } from "../../store";
+import { setSetting } from "../generator/generatorSlice";
+import { Modal, Button } from "react-bootstrap";
 
-
-function Settings() {
+const Settings = () => {
   const dispatch = useAppDispatch();
   const settings = useSelector((state: RootState) => state.settings);
-  const [addedSetting, setAddedSetting] = useState<string>('');
+  const [addedSetting, setAddedSetting] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ function Settings() {
   }, [dispatch]);
 
   const addSetting = (name: string) => {
-    if (!isAdded(name) && addedSetting !== '') {
+    if (!isAdded(name) && addedSetting !== "") {
       setShowModal(true);
     } else {
       setAddedSetting(name);
@@ -29,7 +28,7 @@ function Settings() {
     return addedSetting.includes(setting);
   };
 
-  const handleClose = () => setShowModal(false);  
+  const handleClose = () => setShowModal(false);
 
   return (
     <div className="container">
@@ -57,10 +56,10 @@ function Settings() {
           </tr>
         </thead>
         {settings.loading ? (
-           <div>Loading...</div>
-          ) : (
-            settings.data.map((setting: Setting) => (
-              <tbody>
+          <div>Loading...</div>
+        ) : (
+          settings.data.map((setting: Setting) => (
+            <tbody>
               <tr key={setting.name}>
                 <td>{setting.name}</td>
                 <td>{setting.gravity}</td>
@@ -68,11 +67,18 @@ function Settings() {
                 <td>{setting.rotation_period}</td>
                 <td>{setting.surface_water}</td>
                 <td>{setting.terrain}</td>
-                <td><button onClick={() => addSetting(setting.name)} disabled={isAdded(setting.name)}>Add to Story</button></td>
-              </tr> 
-              </tbody>
-            ))
-          )}
+                <td>
+                  <button
+                    onClick={() => addSetting(setting.name)}
+                    disabled={isAdded(setting.name)}
+                  >
+                    Add to Story
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          ))
+        )}
       </table>
     </div>
   );

@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { Character } from '../features/characters/charactersSlice';
-import { Setting } from '../features/settings/settingsSlice';
-import { Starship } from '../features/starships/starshipsSlice';
+import axios from "axios";
+import { Character } from "../features/characters/charactersSlice";
+import { Setting } from "../features/settings/settingsSlice";
+import { Starship } from "../features/starships/starshipsSlice";
 
-const BASE_URL = 'https://swapi.py4e.com/api/';
+const BASE_URL = "https://swapi.py4e.com/api/";
 
 export const getCharacters = async () => {
   let allCharacters = [] as Character[];
@@ -23,15 +23,9 @@ export const getSettings = async () => {
     const response = await axios.get(nextPage);
     allSettings = [...allSettings, ...response.data.results];
     nextPage = response.data.next;
-  }   
+  }
   return allSettings;
-}
-
-// export const getSetting = async (id: string) => {
-//   const response = await axios.get(`${BASE_URL}/planets/${id}`);
-//   return response.data;
-// }
-
+};
 
 export const getStarships = async () => {
   let allStarships = [] as Starship[];
@@ -43,4 +37,3 @@ export const getStarships = async () => {
   }
   return allStarships;
 };
-

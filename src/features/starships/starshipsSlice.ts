@@ -26,7 +26,7 @@ const initialState: starshipsState = {
 };
 
 const starshipsSlice = createSlice({
-  name: 'starships',
+  name: "starships",
   initialState,
   reducers: {
     getStarshipsStart(state) {
@@ -41,15 +41,12 @@ const starshipsSlice = createSlice({
     getStarshipsFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
-    }
+    },
   },
 });
 
-export const {
-  getStarshipsStart,
-  getStarshipsSuccess,
-  getStarshipsFailure,
-} = starshipsSlice.actions;
+export const { getStarshipsStart, getStarshipsSuccess, getStarshipsFailure } =
+  starshipsSlice.actions;
 
 export const fetchStarships = (): AppThunk => async (dispatch) => {
   try {
@@ -57,7 +54,7 @@ export const fetchStarships = (): AppThunk => async (dispatch) => {
     const starships = await getStarships();
     dispatch(getStarshipsSuccess(starships));
   } catch (error: any) {
-    let errorMessage = 'Unknown error occurred';
+    let errorMessage = "Unknown error occurred";
     if (error instanceof Error) {
       errorMessage = error.message;
     }

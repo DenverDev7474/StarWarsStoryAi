@@ -1,28 +1,17 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-
-
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const Story = () => {
-  const apiResponse = useSelector((state: RootState) => state.generator.completedStory);  
-
-
-  useEffect(() => {
-    console.log(apiResponse);
-  }, [apiResponse]);
-
-
+  const apiResponse = useSelector(
+    (state: RootState) => state.generator.completedStory
+  );
 
   return (
-      <div>
-          <strong>Generated Story:</strong>
-          {apiResponse === '' ? (
-            <p>Loading</p>
-          ) : (
-            <p>{apiResponse}</p>
-          )}
-      </div>
+    <div>
+      <strong>Generated Story:</strong>
+      {apiResponse === "" ? <p>Loading</p> : <p>{apiResponse}</p>}
+    </div>
   );
 };
 

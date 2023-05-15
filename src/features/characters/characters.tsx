@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Character, fetchCharacters } from './charactersSlice';
-import { useAppDispatch, RootState } from '../../store';
-import RoleModal from './roleModal';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Character, fetchCharacters } from "./charactersSlice";
+import { useAppDispatch, RootState } from "../../store";
+import RoleModal from "./roleModal";
 
-
-function Characters() {
+const Characters = () => {
   const dispatch = useAppDispatch();
   const characters = useSelector((state: RootState) => state.characters);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentCharacter, setCurrentCharacter] = useState<Character | null>(null);
+  const [currentCharacter, setCurrentCharacter] = useState<Character | null>(
+    null
+  );
   const [addedCharacters, setAddedCharacters] = useState<string[]>([]);
-
 
   useEffect(() => {
     dispatch(fetchCharacters());
@@ -24,11 +24,10 @@ function Characters() {
 
   const closeModalAfterSelection = () => {
     setIsModalOpen(false);
-    if (currentCharacter ) {
+    if (currentCharacter) {
       setAddedCharacters([...addedCharacters, currentCharacter.name]);
     }
   };
-
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -55,25 +54,33 @@ function Characters() {
             </tr>
           </thead>
           <tbody>
-            {characters.data && characters.data.map((character: Character) => (
-              <tr key={character.name}>
-                <td>{character.name}</td>
-                <td>{character.gender}</td>
-                <td>{character.height}</td>
-                <td>{character.mass}</td>
-                <td><button disabled={isAdded(character.name)}  onClick={() => openModal(character)}>Add to Story</button></td>
-              </tr> 
-            ))}
+            {characters.data &&
+              characters.data.map((character: Character) => (
+                <tr key={character.name}>
+                  <td>{character.name}</td>
+                  <td>{character.gender}</td>
+                  <td>{character.height}</td>
+                  <td>{character.mass}</td>
+                  <td>
+                    <button
+                      disabled={isAdded(character.name)}
+                      onClick={() => openModal(character)}
+                    >
+                      Add to Story
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       )}
-      <RoleModal 
+      <RoleModal
         show={isModalOpen}
-        character={currentCharacter!} 
-        onClose={closeModal} 
+        character={currentCharacter!}
+        onClose={closeModal}
         selected={closeModalAfterSelection}
-    />
-    </div>  
+      />
+    </div>
   );
 };
 

@@ -1,14 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from '../../store';
-import { getSettings } from '../../api/starwarsApi';
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppThunk } from "../../store";
+import { getSettings } from "../../api/starwarsApi";
 
 interface SettingsState {
   loading: boolean;
   error: string | null;
   data: Setting[];
 }
-
 export interface Setting {
   name: string;
   gravity: string;
@@ -18,7 +16,6 @@ export interface Setting {
   terrain: string;
 }
 
-
 const initialState: SettingsState = {
   loading: false,
   error: null,
@@ -26,7 +23,7 @@ const initialState: SettingsState = {
 };
 
 const settingsSlice = createSlice({
-  name: 'settings',
+  name: "settings",
   initialState,
   reducers: {
     getSettingsStart(state) {
@@ -37,19 +34,16 @@ const settingsSlice = createSlice({
     getSettingsSuccess(state, action: PayloadAction<Setting[]>) {
       state.loading = false;
       state.data = action.payload;
-    }, 
+    },
     getSettingsFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
-    }
+    },
   },
 });
 
-export const {
-  getSettingsStart,
-  getSettingsSuccess,
-  getSettingsFailure,
-} = settingsSlice.actions;
+export const { getSettingsStart, getSettingsSuccess, getSettingsFailure } =
+  settingsSlice.actions;
 
 export const fetchSettings = (): AppThunk => async (dispatch) => {
   try {
@@ -57,18 +51,16 @@ export const fetchSettings = (): AppThunk => async (dispatch) => {
     const settings = await getSettings();
     dispatch(getSettingsSuccess(settings));
   } catch (error: any) {
-    let errorMessage = 'Unknown error occurred';
-    if( error.response ) { // handle known server errors
+    let errorMessage = "Unknown error occurred";
+    if (error.response) {
       if (error.response.status === 404) {
-        errorMessage = 'Settings not found';
+        errorMessage = "Settings not found";
       } else if (error.response.status === 500) {
-        errorMessage = 'Server error';
+        errorMessage = "Server error";
       }
     }
     dispatch(getSettingsFailure(errorMessage));
   }
 };
 
-export default settingsSlice.reducer; 
-
-
+export default settingsSlice.reducer;

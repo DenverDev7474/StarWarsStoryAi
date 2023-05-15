@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Starship, fetchStarships } from './starshipsSlice';
-import { useAppDispatch, RootState } from '../../store';
-import StarshipModal from './starshipModal';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Starship, fetchStarships } from "./starshipsSlice";
+import { useAppDispatch, RootState } from "../../store";
+import StarshipModal from "./starshipModal";
 
-function Starships() {
+const Starships = () => {
   const dispatch = useAppDispatch();
   const starships = useSelector((state: RootState) => state.starships);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentStarship, setCurrentStarship] = useState<Starship | null>(null);
   const [addedStarships, setAddedStarships] = useState<string[]>([]);
-  
+
   useEffect(() => {
     dispatch(fetchStarships());
   }, [dispatch]);
@@ -22,7 +22,7 @@ function Starships() {
 
   const closeModalAfterSelection = () => {
     setIsModalOpen(false);
-    if (currentStarship ) {
+    if (currentStarship) {
       setAddedStarships([...addedStarships, currentStarship.name]);
     }
   };
@@ -34,7 +34,7 @@ function Starships() {
   const isAdded = (starshipName: string) => {
     return addedStarships.includes(starshipName);
   };
-  
+
   return (
     <div className="container">
       <h1>Star Wars StarShips</h1>
@@ -53,10 +53,10 @@ function Starships() {
           </tr>
         </thead>
         {starships.loading ? (
-           <div>Loading...</div>
-          ) : (
-            starships.data.map((starship: Starship) => (
-              <tbody>
+          <div>Loading...</div>
+        ) : (
+          starships.data.map((starship: Starship) => (
+            <tbody>
               <tr key={starship.name}>
                 <td>{starship.name}</td>
                 <td>{starship.model}</td>
@@ -66,11 +66,18 @@ function Starships() {
                 <td>{starship.crew}</td>
                 <td>{starship.cargo_capacity}</td>
                 <td>{starship.consumables}</td>
-                <td><button disabled={isAdded(starship.name)} onClick={() => openModal(starship)}>Add to Story</button></td>
-              </tr> 
-              </tbody>
-            ))
-          )}
+                <td>
+                  <button
+                    disabled={isAdded(starship.name)}
+                    onClick={() => openModal(starship)}
+                  >
+                    Add to Story
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          ))
+        )}
       </table>
       <StarshipModal
         show={isModalOpen}
@@ -78,7 +85,7 @@ function Starships() {
         selected={closeModalAfterSelection}
         starship={currentStarship!}
       />
-    </div>  
+    </div>
   );
 };
 

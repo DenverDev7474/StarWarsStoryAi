@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Story {
   hero: string;
@@ -11,17 +11,17 @@ export interface Story {
 }
 
 const initialState: Story = {
-  hero: '',
-  sidekick: '',
-  villain: '',
-  setting: '',
-  villainStarship: '',
-  heroStarship: '',
-  completedStory: ''
+  hero: "",
+  sidekick: "",
+  villain: "",
+  setting: "",
+  villainStarship: "",
+  heroStarship: "",
+  completedStory: "",
 };
 
 const generatorSlice = createSlice({
-  name: 'generator',
+  name: "generator",
   initialState,
   reducers: {
     setHero(state, action: PayloadAction<string>) {
@@ -44,20 +44,18 @@ const generatorSlice = createSlice({
     },
     setCompletedStory(state, action: PayloadAction<string>) {
       state.completedStory = action.payload;
-    }
+    },
   },
-}); 
+});
 
-export const { 
+export const {
   setHero,
-  setSidekick, 
-  setVillain, 
+  setSidekick,
+  setVillain,
   setSetting,
-  setVillainStarship, 
+  setVillainStarship,
   setHeroStarship,
-  setCompletedStory
+  setCompletedStory,
 } = generatorSlice.actions;
 
 export default generatorSlice.reducer;
-
-

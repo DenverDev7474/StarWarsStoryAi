@@ -1,11 +1,9 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { setHero, setSidekick, setVillain } from '../generator/generatorSlice';
-import { Character } from './charactersSlice';
-import { RootState } from '../../store';
-
-
+import React from "react";
+import { Modal, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { setHero, setSidekick, setVillain } from "../generator/generatorSlice";
+import { Character } from "./charactersSlice";
+import { RootState } from "../../store";
 
 interface RoleModalProps {
   character: Character;
@@ -14,7 +12,7 @@ interface RoleModalProps {
   show: boolean;
 }
 
-function RoleModal({ character, onClose, selected, show }: RoleModalProps) {
+const RoleModal = ({ character, onClose, selected, show }: RoleModalProps) => {
   const dispatch = useDispatch();
   const story = useSelector((state: RootState) => state.generator);
 
@@ -44,7 +42,11 @@ function RoleModal({ character, onClose, selected, show }: RoleModalProps) {
         <Button variant="primary" onClick={addAsHero} disabled={!!hero}>
           Add as Hero
         </Button>
-        <Button variant="secondary" onClick={addAsSidekick} disabled={!!sidekick}>
+        <Button
+          variant="secondary"
+          onClick={addAsSidekick}
+          disabled={!!sidekick}
+        >
           Add as Sidekick
         </Button>
         <Button variant="danger" onClick={addAsVillain} disabled={!!villain}>
@@ -58,6 +60,6 @@ function RoleModal({ character, onClose, selected, show }: RoleModalProps) {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default RoleModal;
