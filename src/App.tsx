@@ -4,6 +4,7 @@ import Starships from "./features/starships/starships";
 import Generator from "./features/generator/generator";
 import Home from "./features/home/home";
 import Story from "./features/story/story";
+import Menu from "./features/menu/menu";
 import { Container, Row, Col } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
@@ -13,19 +14,7 @@ function App() {
       <Container fluid>
         <Row>
           <Col xs={12} md={9}>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/characters">Characters</Link>
-                </li>
-                <li>
-                  <Link to="/settings">Settings</Link>
-                </li>
-                <li>
-                  <Link to="/starships">Starships</Link>
-                </li>
-              </ul>
-            </nav>
+            <Menu />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/characters" element={<Characters />} />
