@@ -14,7 +14,7 @@ Using the [Star Wars API](https://swapi.dev/documentation), and OpenAi's [GPT-3]
 5. Image Integration: Integration with an Image API or movie database to add relevant images to the generated story.
 6. Error Handling: Implement error handling for lists and other potential errors.
 7. Better seperation of concerns: Making components into smaller components by , moving business logic into custom hooks.
-8. Adding a selected state so that characters already selected to a list cannot be added to story. 
+8. Adding a selected state so that characters, settings, starships that are already selected to a list cannot be added to story. 
 ## User Stories
 1. As a user, I want to select my favorite Star Wars characters from a comprehensive list.
 - As a user, I want to specify whether a character is a Villain, Hero, or Sidekick.
