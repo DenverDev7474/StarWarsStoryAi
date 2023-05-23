@@ -10,9 +10,11 @@ Using the [Star Wars API](https://swapi.dev/documentation), and OpenAi's [GPT-3]
 1. Plot Options: Users can choose from different plot options or story templates to provide a starting point, such as "rescue mission","bounty hunting adventure", or "rebellion against the Empire."
 2. Story Sharing: Users can easily share their generated story on social media platforms like Facebook, Twitter, or Instagram.
 3. Additional CSS styling.
-4. Clear Button: A button to re-initiate the story generator and start fresh.
+4. Clear Button: A button to re-initiate the story generator and start fresh. (Completed 05/23/2021)
 5. Image Integration: Integration with an Image API or movie database to add relevant images to the generated story.
 6. Error Handling: Implement error handling for lists and other potential errors.
+7. Better seperation of concerns: Making components into smaller components by , moving business logic into custom hooks.
+8. Adding a selected state so that characters already selected to a list cannot be added to story. 
 ## User Stories
 1. As a user, I want to select my favorite Star Wars characters from a comprehensive list.
 - As a user, I want to specify whether a character is a Villain, Hero, or Sidekick.
@@ -73,6 +75,9 @@ This project has pre-installed the [React Bootstrap](https://react-bootstrap.net
 
 ## Thank you for your consideration!
 Let me know if you have any questions or feedback. I look forward to hearing from you!
+
+## Updates and Improvements
+• 05/23/2023: Fixed and updated Redux to persist and clear generator story
 
 
 
