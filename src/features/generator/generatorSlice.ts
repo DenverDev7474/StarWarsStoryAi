@@ -45,8 +45,17 @@ const generatorSlice = createSlice({
     setCompletedStory(state, action: PayloadAction<string>) {
       state.completedStory = action.payload;
     },
+    setResetEmpty(state) {
+      state.hero = "";
+      state.sidekick = "";
+      state.villain = "";
+      state.setting = "";
+      state.villainStarship = "";
+      state.heroStarship = "";
+    },
   },
-});
+}
+);
 
 export const {
   setHero,
@@ -56,6 +65,7 @@ export const {
   setVillainStarship,
   setHeroStarship,
   setCompletedStory,
+  setResetEmpty,
 } = generatorSlice.actions;
 
 export default generatorSlice.reducer;

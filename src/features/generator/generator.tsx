@@ -3,7 +3,7 @@ import { useAppDispatch, RootState } from "../../store";
 import { useSelector } from "react-redux";
 import axios from "axios"; // Make sure to install axios
 import { useNavigate } from "react-router-dom"; // Updated import
-import { setCompletedStory } from "./generatorSlice";
+import { setCompletedStory, setResetEmpty } from "./generatorSlice";
 
 const Generator = () => {
   const [prompt, setPrompt] = useState("");
@@ -87,7 +87,11 @@ const Generator = () => {
             </button>
             <button
               disabled={prompt.length === 0}
-              onClick={() => navigate("/")}
+              onClick={() => {
+                  dispatch(setResetEmpty())
+                  setStoryComplete(false);
+                  navigate("/")
+              }}
             >
               Clear
             </button>
