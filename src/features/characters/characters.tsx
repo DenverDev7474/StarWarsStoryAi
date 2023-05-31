@@ -3,15 +3,29 @@ import { useSelector } from "react-redux";
 import { Character, fetchCharacters } from "./charactersSlice";
 import { useAppDispatch, RootState } from "../../store";
 import RoleModal from "./roleModal";
+import { useNavigate } from "react-router-dom"; // Updated import
+import { setRemoveCharacter } from "../generator/generatorSlice";
+
 
 const Characters = () => {
   const dispatch = useAppDispatch();
   const characters = useSelector((state: RootState) => state.characters);
+  const selectedCharacters = useSelector(
+    (state: RootState) => state.generator
+  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentCharacter, setCurrentCharacter] = useState<Character | null>(
     null
   );
   const [addedCharacters, setAddedCharacters] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (selectedCharacters.hero || selectedCharacters.sidekick || selectedCharacters.villain){
+      setAddedCharacters([selectedCharacters.hero, selectedCharacters.sidekick, selectedCharacters.villain]);
+    }
+  }, [selectedCharacters.hero, selectedCharacters.sidekick, selectedCharacters.villain]);
+
 
   useEffect(() => {
     dispatch(fetchCharacters());
@@ -37,9 +51,16 @@ const Characters = () => {
     return addedCharacters.includes(characterName);
   };
 
+  const handleRemoveCharacter = (characterName: string) => {
+    setAddedCharacters(addedCharacters.filter((name) => name !== characterName));
+    dispatch(setRemoveCharacter(characterName));
+  };
+
+
+
   return (
     <div className="container">
-      <h1>Star Wars Characters</h1>
+      <h1>Add Star Wars Characters</h1>
       {characters.loading ? (
         <div>Loading...</div>
       ) : (
@@ -50,6 +71,7 @@ const Characters = () => {
               <th>Gender</th>
               <th>Height</th>
               <th>Mass</th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -67,6 +89,13 @@ const Characters = () => {
                       onClick={() => openModal(character)}
                     >
                       Add to Story
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      disabled={!isAdded(character.name)}
+                      onClick={() => { handleRemoveCharacter(character.name) }} >
+                      Remove from Story
                     </button>
                   </td>
                 </tr>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Setting, fetchSettings } from "./settingsSlice";
 import { useAppDispatch, RootState } from "../../store";
-import { setSetting } from "../generator/generatorSlice";
-import { Modal, Button } from "react-bootstrap";
+import { setRemoveSetting , setSetting } from "../generator/generatorSlice";
+import { Modal, Button } from "react-bootstrap"
 
 const Settings = () => {
   const dispatch = useAppDispatch();
@@ -30,9 +30,14 @@ const Settings = () => {
 
   const handleClose = () => setShowModal(false);
 
+  const handleRemoveSetting = (name: string) => {
+    dispatch(setRemoveSetting(name));
+    setAddedSetting("");
+  }
+
   return (
     <div className="container">
-      <h1>Star Wars Settings</h1>
+      <h1>Add Star Wars Settings</h1>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Warning</Modal.Title>
@@ -73,6 +78,14 @@ const Settings = () => {
                     disabled={isAdded(setting.name)}
                   >
                     Add to Story
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleRemoveSetting(setting.name)}
+                    disabled={!isAdded(setting.name)}
+                  >
+                    Remove from Story
                   </button>
                 </td>
               </tr>

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Starship, fetchStarships } from "./starshipsSlice";
 import { useAppDispatch, RootState } from "../../store";
 import StarshipModal from "./starshipModal";
+import { setRemoveStarship } from "../generator/generatorSlice";
 
 const Starships = () => {
   const dispatch = useAppDispatch();
@@ -35,9 +36,16 @@ const Starships = () => {
     return addedStarships.includes(starshipName);
   };
 
+  const handleRemoveStarship = (starshipName: string) => {
+    setAddedStarships(addedStarships.filter((name) => name !== starshipName));
+    dispatch(setRemoveStarship(starshipName))
+  }
+
+
+
   return (
     <div className="container">
-      <h1>Star Wars StarShips</h1>
+      <h1>Add Star Wars StarShips</h1>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -49,6 +57,7 @@ const Starships = () => {
             <th>crew</th>
             <th>cargo_capacity</th>
             <th>consumables</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -72,6 +81,14 @@ const Starships = () => {
                     onClick={() => openModal(starship)}
                   >
                     Add to Story
+                  </button>
+                </td>
+                <td>
+                  <button
+                    disabled={!isAdded(starship.name)}
+                    onClick={() => {handleRemoveStarship(starship.name)}}
+                  >
+                    Remove from Story
                   </button>
                 </td>
               </tr>

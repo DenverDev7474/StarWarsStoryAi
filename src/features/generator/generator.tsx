@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios"; // Make sure to install axios
 import { useNavigate } from "react-router-dom"; // Updated import
 import { setCompletedStory, setResetEmpty } from "./generatorSlice";
+import "../../components/css/generator.css";
 
 const Generator = () => {
   const [prompt, setPrompt] = useState("");
@@ -54,9 +55,14 @@ const Generator = () => {
   };
 
   return (
-    <div>
-      {storyComplete ? (
-        <div>
+    <div className="centered-content">
+      {hero ||
+      sidekick ||
+      villain ||
+      setting ||
+      villainStarship ||
+      heroStarship ? (
+        <div className="formContainer">
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="hero">Hero:</label>

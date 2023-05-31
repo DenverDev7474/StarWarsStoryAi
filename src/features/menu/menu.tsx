@@ -6,7 +6,7 @@ const Menu = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand>Starwars Story Ai</Navbar.Brand>
+        <Navbar.Brand>Star Wars Story Ai</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

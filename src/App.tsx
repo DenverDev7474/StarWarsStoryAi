@@ -7,13 +7,14 @@ import Story from "./features/story/story";
 import Menu from "./features/menu/menu";
 import { Container, Row, Col } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import './components/css/app.css';
 
 function App() {
   return (
     <Router>
       <Container fluid>
         <Row>
-          <Col xs={12} md={9}>
+          <Col xs={12} md={9} className="internalcontainers">
             <Menu />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -23,7 +24,7 @@ function App() {
               <Route path="/story" element={<Story />} />
             </Routes>
           </Col>
-          <Col xs={12} md={3}>
+          <Col xs={12} md={3} className="generatorContainer">
             <Generator />
           </Col>
         </Row>

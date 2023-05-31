@@ -53,6 +53,38 @@ const generatorSlice = createSlice({
       state.villainStarship = "";
       state.heroStarship = "";
     },
+    setRemoveCharacter(state, action: PayloadAction<string>) {
+      switch (action.payload) {
+        case state.hero:
+          state.hero = "";
+          break;
+        case state.sidekick:
+          state.sidekick = "";
+          break;
+        case state.villain:
+          state.villain = "";
+          break;
+        default:
+          break;
+      }
+    },
+    setRemoveSetting(state, action: PayloadAction<string>) {
+      if (action.payload === state.setting) {
+        state.setting = "";
+      }
+    },
+    setRemoveStarship(state, action: PayloadAction<string>) {
+      switch (action.payload) {
+        case state.villainStarship:
+          state.villainStarship = "";
+          break;
+        case state.heroStarship:
+          state.heroStarship = "";
+          break;
+        default:
+          break;
+      }
+    }
   },
 }
 );
@@ -66,6 +98,9 @@ export const {
   setHeroStarship,
   setCompletedStory,
   setResetEmpty,
+  setRemoveCharacter,
+  setRemoveSetting,
+  setRemoveStarship,
 } = generatorSlice.actions;
 
 export default generatorSlice.reducer;
