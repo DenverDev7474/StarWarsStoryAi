@@ -33,25 +33,42 @@ const Generator = () => {
     );
   }, [hero, sidekick, villain, setting, villainStarship, heroStarship]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      console.log(prompt);
-      const result = await axios.post("http://localhost:8000/api/generate", {
-        prompt: prompt,
-        maxTokens: 4000,
-        temperature: 0.5,
-      });
-      console.log(result.data);
-      dispatch(setCompletedStory(result.data));
-      navigate("/story");
-    } catch (e) {
-      dispatch(
-        setCompletedStory("Something is going wrong, Please try again.")
-      );
+  const validateData = (e: React.FormEvent<HTMLFormElement>) => {
+    if (
+      hero === "" ||
+      sidekick === "" ||
+      villain === "" ||
+      setting === "" ||
+      villainStarship === "" ||
+      heroStarship === ""
+    ) {
+      e.preventDefault();
+      alert("Please fill out all fields");
     }
-    setLoading(false);
+  };
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if (storyComplete) {
+      e.preventDefault();
+      try {
+        setLoading(true);
+        const result = await axios.post("http://localhost:8000/api/generate", {
+          prompt: prompt,
+          maxTokens: 4000,
+          temperature: 0.5,
+        });
+        dispatch(setCompletedStory(result.data));
+        navigate("/story");
+      } catch (e) {
+        dispatch(
+          setCompletedStory("Something is going wrong, Please try again.")
+        );
+      }
+      setLoading(false);
+    } else {
+      validateData(e);
+    }
   };
 
   return (

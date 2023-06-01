@@ -4,11 +4,17 @@ import { Starship, fetchStarships } from "./starshipsSlice";
 import { useAppDispatch, RootState } from "../../store";
 import StarshipModal from "./starshipModal";
 import { setRemoveStarship } from "../generator/generatorSlice";
+import { Modal, Button } from "react-bootstrap"
+
 
 const Starships = () => {
   const dispatch = useAppDispatch();
   const starships = useSelector((state: RootState) => state.starships);
+  const selectedStarships = useSelector(
+    (state: RootState) => state.generator
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [currentStarship, setCurrentStarship] = useState<Starship | null>(null);
   const [addedStarships, setAddedStarships] = useState<string[]>([]);
 
@@ -16,9 +22,23 @@ const Starships = () => {
     dispatch(fetchStarships());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (selectedStarships.heroStarship || selectedStarships.villainStarship) {
+      setAddedStarships([
+        selectedStarships.heroStarship,
+        selectedStarships.villainStarship,
+      ]);
+    }
+  }, [selectedStarships.heroStarship, selectedStarships.villainStarship]);  
+
+
   const openModal = (starship: Starship) => {
-    setCurrentStarship(starship);
-    setIsModalOpen(true);
+    if (selectedStarships.heroStarship && selectedStarships.villainStarship) {
+      setIsAlertModalOpen(true);
+    } else {  
+      setCurrentStarship(starship);
+      setIsModalOpen(true);
+    }
   };
 
   const closeModalAfterSelection = () => {
@@ -40,7 +60,6 @@ const Starships = () => {
     setAddedStarships(addedStarships.filter((name) => name !== starshipName));
     dispatch(setRemoveStarship(starshipName))
   }
-
 
 
   return (
@@ -102,6 +121,17 @@ const Starships = () => {
         selected={closeModalAfterSelection}
         starship={currentStarship!}
       />
+      <Modal show={isAlertModalOpen} onHide={() => { setIsAlertModalOpen(false)} }>
+        <Modal.Header closeButton>
+          <Modal.Title>Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Starship already exists!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => { setIsAlertModalOpen(false)} }>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -45,13 +45,8 @@ const generatorSlice = createSlice({
     setCompletedStory(state, action: PayloadAction<string>) {
       state.completedStory = action.payload;
     },
-    setResetEmpty(state) {
-      state.hero = "";
-      state.sidekick = "";
-      state.villain = "";
-      state.setting = "";
-      state.villainStarship = "";
-      state.heroStarship = "";
+    setResetEmpty() {
+      return initialState;
     },
     setRemoveCharacter(state, action: PayloadAction<string>) {
       switch (action.payload) {

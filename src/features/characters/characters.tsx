@@ -5,6 +5,8 @@ import { useAppDispatch, RootState } from "../../store";
 import RoleModal from "./roleModal";
 import { useNavigate } from "react-router-dom"; // Updated import
 import { setRemoveCharacter } from "../generator/generatorSlice";
+import { Modal, Button } from "react-bootstrap"
+
 
 
 const Characters = () => {
@@ -15,6 +17,7 @@ const Characters = () => {
   );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [currentCharacter, setCurrentCharacter] = useState<Character | null>(
     null
   );
@@ -32,8 +35,12 @@ const Characters = () => {
   }, [dispatch]);
 
   const openModal = (character: Character) => {
-    setCurrentCharacter(character);
-    setIsModalOpen(true);
+    if (selectedCharacters.hero && selectedCharacters.sidekick && selectedCharacters.villain) {
+      setIsAlertModalOpen(true);
+    } else {
+      setCurrentCharacter(character);
+      setIsModalOpen(true);
+    }
   };
 
   const closeModalAfterSelection = () => {
@@ -109,6 +116,17 @@ const Characters = () => {
         onClose={closeModal}
         selected={closeModalAfterSelection}
       />
+      <Modal show={isAlertModalOpen} onHide={() => { setIsAlertModalOpen(false)} }>
+        <Modal.Header closeButton>
+          <Modal.Title>Warning</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Starship already exists!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => { setIsAlertModalOpen(false)} }>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

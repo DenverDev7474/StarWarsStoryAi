@@ -9,11 +9,21 @@ const Settings = () => {
   const dispatch = useAppDispatch();
   const settings = useSelector((state: RootState) => state.settings);
   const [addedSetting, setAddedSetting] = useState<string>("");
+  const selectedSettings = useSelector(
+    (state: RootState) => state.generator
+  );
+
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchSettings());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (selectedSettings.setting) {
+      setAddedSetting(selectedSettings.setting);
+    }
+  }, [selectedSettings.setting]);
 
   const addSetting = (name: string) => {
     if (!isAdded(name) && addedSetting !== "") {
