@@ -52,7 +52,7 @@ const Settings = () => {
         <Modal.Header closeButton>
           <Modal.Title>Warning</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Setting already exists!</Modal.Body>
+        <Modal.Body>Settings already selected!</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

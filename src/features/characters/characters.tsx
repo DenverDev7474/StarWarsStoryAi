@@ -120,7 +120,7 @@ const Characters = () => {
         <Modal.Header closeButton>
           <Modal.Title>Warning</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Starship already exists!</Modal.Body>
+        <Modal.Body>Characters are already select!</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => { setIsAlertModalOpen(false)} }>
             Close
