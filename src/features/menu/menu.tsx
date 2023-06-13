@@ -13,6 +13,7 @@ const Menu = () => {
             <Nav.Link  href="/characters">Characters</Nav.Link>
             <Nav.Link  href="/settings">Settings</Nav.Link>
             <Nav.Link  href="/starships">Starships</Nav.Link>
+            <Nav.Link  href="/plot">Plot</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
